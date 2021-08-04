@@ -9,6 +9,20 @@ import (
 	"text/template"
 )
 
+// 记录客户端请求信息日志函数
+func AccessLog(ip, method, url, userAgent string, stauts int) {
+	log.Printf(`%s %s %s "%s" %d`, ip, method, url, userAgent, stauts)
+}
+
+// 通过闭包的手段
+// 编写日志包装函数，等会在路由中调用该函数，因为我们的 GetUser AddUser DeleteUser Edit 等多个函数满足 http.HandlerFunc 方法
+func LoggerWrapper(action http.HandlerFunc) http.HandlerFunc {
+	return func(rw http.ResponseWriter, r *http.Request) {
+		action(rw, r)
+		AccessLog(r.RemoteAddr, r.Method, r.URL.String(), r.Header.Get("User-Agent"), 200)
+	}
+}
+
 func GetUser(rw http.ResponseWriter, r *http.Request) {
 	tpl, err := template.New("web").ParseFiles("template/user.html")
 	if err != nil {
