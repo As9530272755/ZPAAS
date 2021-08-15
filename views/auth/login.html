@@ -7,12 +7,13 @@
             <h1>用户登录</h1>
             <form action="/auth/login/" method="post">
                 <!-- 如果 error 为真就输出 error -->
-                {{ if .error }}
-                <div>{{ .error }}</div>
+                {{ if .errors.default }}
+                <!-- 拿出错误切片的第一个元素 -->
+                <div>{{ index .errors.default 0 }}</div>
                 {{ end }}
                 <div>
                     <label>用户名:</label>
-                    <input name="username" type="text" value=""/>
+                    <input name="username" type="text" value="{{ .form.Username}}"/>
                 </div>
                 <div>
                     <label>密码：</label>

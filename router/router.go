@@ -7,6 +7,7 @@ import (
 )
 
 func Register() {
+	beego.AutoRouter(&controller.HomeController{})
 	beego.AutoRouter(&controller.AuthController{})
 	beego.AutoRouter(&controller.UserController{})
 }
