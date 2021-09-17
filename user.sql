@@ -13,4 +13,5 @@ create table if not exists webuser (
     deleted_at datetime
 ) engine=innodb default charset utf8mb4;
 
-alter table WEBuser add column if not exists password varchar(1024) not null default '';
+alter table webuser add column password varchar(1024) not null default '';
+
