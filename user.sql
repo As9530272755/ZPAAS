@@ -15,3 +15,5 @@ create table if not exists webuser (
 
 alter table webuser add column password varchar(1024) not null default '';
 
+-- 默认密码 123456
+pdate webuser set password='$2a$10$XEbCQ7LH4BYRWsDpOpA.k.TQzHnhPLpOOBw8ViofWCao8gVrZBbCG' where id=1;
