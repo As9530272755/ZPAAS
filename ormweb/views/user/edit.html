@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Modify user {{ .user.Name }}</title>
+    </head>
+    <body>
+        <form action="/user/edit/?id={{ .user.Id }}" method="POST">
+            <label> 修改ID：</label><input name="id" value="{{ .user.Id }}" readonly/> <br/>
+            <labels>修改姓名：</labels><input name="name" value="{{ .user.Name }}"/><br/>
+            <label>修改年龄：</label><input name="age" value="{{ .user.Age }}"/><br/>
+            <label>修改电话：</label><input name="tel" value="{{ .user.Tel }}"/><br/>
+            <label>修改密码：</label><input name="password" value=""/><br/>
+            <label>修改性别：</label>
+                <input name="sex" type="radio" value="1"/> 男
+                <input name="sex" type="radio" value="0"/> 女<br/>
+            <label>修改住址：</label><textarea name="addr" value=""></textarea><br/>
+            <input type="submit" value="确认修改" />
+        </form>
+    </body>
+</html>
