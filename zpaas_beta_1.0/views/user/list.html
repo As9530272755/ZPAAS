@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户列表</title>
+    <!-- <link rel="stylesheet" href="/static/vendor/bootstrap-4.6.0/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/static/vendor/AdminLTE-master/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/static/css/tmp.css">
+</head>
+<body class="layout-fixed navbar-dark dark-mode " >
+  {{ template "base/menu.html" . }}
+    <!-- container-fluid 左右对求 -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9 offset-2">
+                <!-- 判断是否有 flash ，如果有调用 div -->
+                {{ if .flash.success }}
+                <div class="alert alert-success" role="alert">
+                    {{ .flash.success }}
+                </div>
+                {{ end }}
+                {{ if .flash.delete }}
+                <div class="alert alert-danger" role="alert">
+                    {{ .flash.delete }}
+                </div>
+                {{ end }}
+        <table class="table table-hover ">
+            <thead class="thead-dark">
+                <tr>
+                    <th>姓名  </th>
+                    <th>年龄  </th>
+                    <th>电话  </th>
+                    <th>性别  </th>
+                    <th>地址  </th>
+                    <th>操作  </th>
+                </tr>
+            </thead>
+            <tbody >
+                {{ range .user }}
+                <tr>
+                    <td> {{ .Name }} </td>
+                    <td> {{ .Age }} </td>
+                    <td> {{ .Tel }} </td>
+                    <td> {{ if .Sex }} 男 {{ else }} 女 {{ end }} </td>
+                    <td> {{ .Addr }} </td>
+                    <td>
+                        <a type="button" class="btn btn-sm btn-outline-info" href="/user/edit/?id={{ .Id }}">编辑</a>
+                        <!-- web 页面输入 id = 遍历当前用户的 id 执行 后端 delete 函数-->
+                        <a type="button" href="/user/delete/?id={{ .Id }}" class="btn btn-sm btn-outline-danger">删除</a>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
